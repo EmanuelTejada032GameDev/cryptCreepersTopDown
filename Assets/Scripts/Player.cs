@@ -10,18 +10,19 @@ public class Player : MonoBehaviour
     [SerializeField] Transform aim;
     [SerializeField] Camera camera;
 
+    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] Transform firepointAim;
+
+    bool availableToShoot = true;
+    [SerializeField] float fireRate = 1f;
 
     private Vector2 facingDirection;
-
-
-    private void Start()
-    {
-      
-    }
+    
 
     private void Update()
     {
         PlayerMovement();
+        shoot();
     }
 
     private void PlayerMovement()
@@ -35,7 +36,23 @@ public class Player : MonoBehaviour
 
         // Make sure the distance between player and aim object is the same
         aim.position = transform.position + (Vector3)facingDirection.normalized;
+    }
 
+    private void shoot()
+    {
+        if (Input.GetMouseButton(0) && availableToShoot)
+        {
+            availableToShoot = false;
+            float angle = Mathf.Atan2(facingDirection.y, facingDirection.x) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            Instantiate(bulletPrefab, transform.position, targetRotation);
+            StartCoroutine(TimeToShoot());
+        }
+    }
 
+    IEnumerator TimeToShoot()
+    {
+        yield return new WaitForSeconds(1/fireRate);
+        availableToShoot = true;
     }
 }
