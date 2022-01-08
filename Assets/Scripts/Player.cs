@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     private Vector3 movementVector;
     [SerializeField] float speed;
+    [SerializeField] int health;
 
     [SerializeField] Transform aim;
     [SerializeField] Camera camera;
@@ -47,6 +48,16 @@ public class Player : MonoBehaviour
             Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
             Instantiate(bulletPrefab, transform.position, targetRotation);
             StartCoroutine(TimeToShoot());
+        }
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        health -= damageAmount;
+        if (health <= 0)
+        {
+            FindObjectOfType<EnemySpawner>().gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 

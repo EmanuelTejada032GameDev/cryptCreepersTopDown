@@ -7,10 +7,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int health;
     private Transform player;
     [SerializeField] private float speed;
+    [SerializeField] int damage;
 
     private void Start()
     {
-        player = FindObjectOfType<Player>().transform;
+        
+        if(GameObject.FindGameObjectWithTag("Player"))
+        {
+            player = FindObjectOfType<Player>().transform;
+        }
     }
 
 
@@ -24,14 +29,26 @@ public class Enemy : MonoBehaviour
         health -= damageAmount;
         if (health <= 0)
         {
-            Destroy(gameObject, 0.5f);
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            collision.GetComponent<Player>().TakeDamage(damage);
         }
     }
 
     private void ChasePlayer()
     {
-        Vector2 direction = player.position - transform.position;
-        transform.position += (Vector3)direction * speed * Time.deltaTime;
+        if(player != null)
+        {
+            Vector2 direction = player.position - transform.position;
+            transform.position += (Vector3)direction.normalized * speed * Time.deltaTime;
+        }
+
     }
 
 }
