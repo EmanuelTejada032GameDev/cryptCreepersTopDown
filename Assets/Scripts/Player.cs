@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     {
         movementVector.x = Input.GetAxisRaw("Horizontal");
         movementVector.y = Input.GetAxisRaw("Vertical");
-        transform.position += movementVector * speed * Time.deltaTime;
+        transform.position += movementVector.normalized * speed * Time.deltaTime;
 
         //Aim movement
         facingDirection = camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
