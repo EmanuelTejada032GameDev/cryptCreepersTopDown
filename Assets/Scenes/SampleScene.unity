@@ -7176,7 +7176,7 @@ MonoBehaviour:
   speed: 5
   health: 5
   aim: {fileID: 1110552199}
-  camera: {fileID: 519420031}
+  mainCamera: {fileID: 519420031}
   bulletPrefab: {fileID: 2474070785715710368, guid: 9a111860425bcd44ba2506708cf1d51e, type: 3}
   firepointAim: {fileID: 1110552199}
   fireRate: 10
@@ -7355,6 +7355,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3748509454308237849, guid: 53bf780b04647d948bcd1950b7b503d6, type: 3}
   m_PrefabInstance: {fileID: 856370490}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &958939975
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 958939977}
+  - component: {fileID: 958939976}
+  m_Layer: 0
+  m_Name: ItemSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &958939976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958939975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41c254845ce536f49b058bca91d29ea2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeExtenderCheckpointPrefab: {fileID: 1476908200730693258, guid: 57955f1502324844bbf3f7d55c42311a, type: 3}
+  spawnTimeRate: 6
+  spawnRadiusRange: 7
+--- !u!4 &958939977
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958939975}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.236544, y: 0.58182913, z: -2.3355098}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &971154744
 GameObject:
   m_ObjectHideFlags: 0
@@ -7384,7 +7430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94702160ff64204090e0e3989c64d6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 6
+  time: 30
   dificulty: 1
 --- !u!4 &971154746
 Transform:
@@ -7828,36 +7874,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1762998520
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1762998521}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1762998521
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1762998520}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.2, y: 0.93, z: -1.0583013}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2059097492
 PrefabInstance:

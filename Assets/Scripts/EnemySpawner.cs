@@ -11,11 +11,12 @@ public class EnemySpawner : MonoBehaviour
     {
         StartCoroutine("SpawnNewEnemy");
     }
-    private Vector2 RandomSpawnPoint()
+
+    IEnumerator SpawnNewEnemy()
     {
-        int x = Random.Range(-14, 19);
-        int y = Random.Range(-6, 7);
-        return new Vector2(x,y);
+        yield return new WaitForSeconds(1/spawnRate);
+        EnemyToSpawn();
+        StartCoroutine("SpawnNewEnemy");
     }
 
     private void EnemyToSpawn()
@@ -28,11 +29,11 @@ public class EnemySpawner : MonoBehaviour
         Instantiate(enemyPrefabs[enemy], RandomSpawnPoint(), Quaternion.identity);
     }
 
-    
-    IEnumerator SpawnNewEnemy()
+    private Vector2 RandomSpawnPoint()
     {
-        yield return new WaitForSeconds(1/spawnRate);
-        EnemyToSpawn();
-        StartCoroutine("SpawnNewEnemy");
+        int x = Random.Range(-14, 19);
+        int y = Random.Range(-6, 7);
+        return new Vector2(x,y);
     }
+    
 }

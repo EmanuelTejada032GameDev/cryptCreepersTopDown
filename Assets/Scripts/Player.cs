@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] int health;
 
     [SerializeField] Transform aim;
-    [SerializeField] Camera camera;
+    [SerializeField] Camera mainCamera;
 
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform firepointAim;
@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
         transform.position += movementVector.normalized * speed * Time.deltaTime;
 
         //Aim movement
-        facingDirection = camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        facingDirection = mainCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
         // Make sure the distance between player and aim object is the same
         aim.position = transform.position + (Vector3)facingDirection.normalized;
