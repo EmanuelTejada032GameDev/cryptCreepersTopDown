@@ -8,10 +8,12 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] float spawnTimeRate = 6f;
     [SerializeField] float spawnRadiusRange = 7f;
     
-
+    [SerializeField] GameObject[] powerUpPrefabs;
+    [SerializeField] float powerUpSpawnTimeRate = 10f;
     private void Start()
     {
         StartCoroutine(SpawnTimeExtender());
+        StartCoroutine(SpawnPowerUp());
     }
 
 
@@ -23,10 +25,20 @@ public class ItemSpawner : MonoBehaviour
 
     }
 
+    private IEnumerator SpawnPowerUp()
+    {
+        yield return new WaitForSeconds(powerUpSpawnTimeRate);
+        int randomPowerUpIndex = Random.Range(0, powerUpPrefabs.Length);
+        Instantiate(powerUpPrefabs[randomPowerUpIndex], GenerateRandomSpawnPoint(), Quaternion.identity);
+        StartCoroutine("SpawnPowerUp");
+    }
+
     private Vector2 GenerateRandomSpawnPoint()
     {
         return Random.insideUnitCircle * spawnRadiusRange;
     }
+
+
 
     private void OnDrawGizmos()
     {

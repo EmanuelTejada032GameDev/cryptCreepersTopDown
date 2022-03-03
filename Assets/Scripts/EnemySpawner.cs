@@ -6,10 +6,12 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] GameObject[] enemyPrefabs;
     [Range(1,10)][SerializeField] float spawnRate = 1;
+    private GameObject[] spawnPoints;
 
     private void Start()
     {
         StartCoroutine("SpawnNewEnemy");
+        spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
     }
 
     IEnumerator SpawnNewEnemy()
@@ -31,9 +33,7 @@ public class EnemySpawner : MonoBehaviour
 
     private Vector2 RandomSpawnPoint()
     {
-        int x = Random.Range(-14, 19);
-        int y = Random.Range(-6, 7);
-        return new Vector2(x,y);
+        return spawnPoints[Random.Range(0, spawnPoints.Length - 1)].transform.position;
     }
     
 }

@@ -66,4 +66,24 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(1/fireRate);
         availableToShoot = true;
     }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        if (collision.CompareTag("PowerUp"))
+        {
+            string powerUpName = collision.gameObject.name;
+            switch (powerUpName)
+            {
+                case "PowerUp(Clone)":
+                    Debug.Log($"You got {powerUpName}");
+                    break;
+                case "PowerUp2(Clone)":
+                    Debug.Log($"You got {powerUpName}");
+                    break;
+                
+            }
+        }
+    }
 }
