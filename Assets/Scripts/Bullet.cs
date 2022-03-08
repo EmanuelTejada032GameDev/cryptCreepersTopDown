@@ -6,6 +6,10 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] float bulletSpeed = 5;
     [SerializeField] int damage;
+    [SerializeField] int health = 3;
+
+
+    public bool powerShot;
     void Update()
     {
         transform.position += transform.right  * bulletSpeed * Time.deltaTime;
@@ -19,7 +23,11 @@ public class Bullet : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             collision.GetComponent<Enemy>().TakeDamage(damage);
-            Destroy(gameObject);
+            if(!powerShot)
+                Destroy(gameObject);
+            health--;
+            if (health <= 0)
+                Destroy(gameObject);
         }
     }
 

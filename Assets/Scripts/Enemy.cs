@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     private Transform player;
     [SerializeField] private float speed;
     [SerializeField] int damage;
+    private int scorePoints = 50;
 
     private void Start()
     {
@@ -29,6 +30,7 @@ public class Enemy : MonoBehaviour
         health -= damageAmount;
         if (health <= 0)
         {
+            GameManager.Instance.Score+=scorePoints;
             Destroy(gameObject);
         }
     }

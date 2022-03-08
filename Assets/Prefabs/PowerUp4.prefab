@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 7212776218655672863}
   - component: {fileID: 4583470543918426006}
   m_Layer: 0
-  m_Name: PowerUp2
+  m_Name: PowerUp4
   m_TagString: PowerUp
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -89,8 +89,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1360573819756025394, guid: 54318052d9c575d4b9b672c5f4abffec, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: -6022113249499666847, guid: 4128724a293752241b91ea18d1f7e01f, type: 3}
+  m_Color: {r: 0.7147546, g: 0.745283, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -112,4 +112,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48fa58b192c2c284cb2bcea2c9c30ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUpType: 1
+  powerUpType: 3

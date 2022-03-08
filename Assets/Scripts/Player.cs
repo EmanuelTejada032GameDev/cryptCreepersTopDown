@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static PowerUp;
 
 public class Player : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class Player : MonoBehaviour
 
     bool availableToShoot = true;
     [SerializeField] float fireRate = 1f;
+
+    bool powerShotEnabled;
+    bool Invulnerable;
 
     private Vector2 facingDirection;
     
@@ -46,14 +50,26 @@ public class Player : MonoBehaviour
             availableToShoot = false;
             float angle = Mathf.Atan2(facingDirection.y, facingDirection.x) * Mathf.Rad2Deg;
             Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            Instantiate(bulletPrefab, transform.position, targetRotation);
+            GameObject bulletClone = Instantiate(bulletPrefab, transform.position, targetRotation);
+            if (powerShotEnabled)
+            {
+                bulletClone.GetComponent<Bullet>().powerShot = true;
+            }
             StartCoroutine(TimeToShoot());
         }
     }
 
     public void TakeDamage(int damageAmount)
     {
+
+        if (Invulnerable)
+            return;
+
+
         health -= damageAmount;
+        Invulnerable = true;
+        StartCoroutine("InactivateInvulneravility");
+
         if (health <= 0)
         {
             FindObjectOfType<EnemySpawner>().gameObject.SetActive(false);
@@ -73,17 +89,33 @@ public class Player : MonoBehaviour
 
         if (collision.CompareTag("PowerUp"))
         {
-            string powerUpName = collision.gameObject.name;
+            PowerUpType powerUpName = collision.GetComponent<PowerUp>().powerUpType;
             switch (powerUpName)
             {
-                case "PowerUp(Clone)":
-                    Debug.Log($"You got {powerUpName}");
+                case PowerUpType.FireRateIncrease:
+                    fireRate++;
                     break;
-                case "PowerUp2(Clone)":
-                    Debug.Log($"You got {powerUpName}");
+                case PowerUpType.ShotPowerIncrease:
+                    powerShotEnabled = true;
                     break;
-                
+                case PowerUpType.Health:
+                    Debug.Log($"Adding two point to health, current : {health}");
+                    health += 2;
+                    Debug.Log($"Adding two point to healt, now is {health}");
+
+                    break;
+                case PowerUpType.Invulnerable:
+                    Invulnerable = true;
+                    StartCoroutine("InactivateInvulneravility");
+                    break;
             }
+            Destroy(collision.gameObject, 0.1f);
         }
+    }
+
+    IEnumerator InactivateInvulneravility()
+    {
+        yield return new WaitForSeconds(3);
+        Invulnerable = false;
     }
 }
