@@ -6,7 +6,7 @@ using static PowerUp;
 public class Player : MonoBehaviour
 {
     private Vector3 movementVector;
-    [SerializeField] float speed;
+    public float speed;
     [SerializeField] int health;
 
     [SerializeField] Transform aim;
@@ -118,4 +118,6 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(3);
         Invulnerable = false;
     }
+
+    
 }
