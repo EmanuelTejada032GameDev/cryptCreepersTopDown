@@ -22,7 +22,21 @@ public class Player : MonoBehaviour
     bool Invulnerable;
 
     private Vector2 facingDirection;
-    
+
+    public int Health
+    {
+        get => health;
+        set
+        {
+            health = value;
+            UIManager.Instance.UpdateUIhealth(health);
+        }
+    }
+
+    private void Start()
+    {
+        UIManager.Instance.UpdateUIhealth(health);
+    }
 
     private void Update()
     {
@@ -66,14 +80,17 @@ public class Player : MonoBehaviour
             return;
 
 
-        health -= damageAmount;
+        Health -= damageAmount;
+        Debug.Log("Invulnerable for 3 seconds");
         Invulnerable = true;
-        StartCoroutine("InactivateInvulneravility");
+        StartCoroutine("DeactivateInvulneravility");
 
-        if (health <= 0)
+        if (Health <= 0)
         {
-            FindObjectOfType<EnemySpawner>().gameObject.SetActive(false);
+            if(FindObjectOfType<EnemySpawner>() != null) FindObjectOfType<EnemySpawner>().gameObject.SetActive(false);
             Destroy(gameObject);
+            GameManager.Instance.gameOver = true;
+            UIManager.Instance.ShowGameOverScreen();
         }
     }
 
@@ -93,29 +110,31 @@ public class Player : MonoBehaviour
             switch (powerUpName)
             {
                 case PowerUpType.FireRateIncrease:
+                    Debug.Log("Increasing fire rate");
                     fireRate++;
                     break;
                 case PowerUpType.ShotPowerIncrease:
+                    Debug.Log("Pierce enabled");
                     powerShotEnabled = true;
                     break;
                 case PowerUpType.Health:
-                    Debug.Log($"Adding two point to health, current : {health}");
-                    health += 2;
-                    Debug.Log($"Adding two point to healt, now is {health}");
-
+                    Debug.Log("Health increase +2");
+                    Health += 2;
                     break;
                 case PowerUpType.Invulnerable:
+                    Debug.Log("Invulnerable powerup for 3 seconds");
                     Invulnerable = true;
-                    StartCoroutine("InactivateInvulneravility");
+                    StartCoroutine("DeactivateInvulneravility");
                     break;
             }
             Destroy(collision.gameObject, 0.1f);
         }
     }
 
-    IEnumerator InactivateInvulneravility()
+    IEnumerator DeactivateInvulneravility()
     {
         yield return new WaitForSeconds(3);
+        Debug.Log("Again vulnerable");
         Invulnerable = false;
     }
 

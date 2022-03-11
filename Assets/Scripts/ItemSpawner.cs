@@ -29,7 +29,6 @@ public class ItemSpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(powerUpSpawnTimeRate);
         int randomPowerUpIndex = Random.Range(0, powerUpPrefabs.Length);
-        Debug.Log(powerUpPrefabs[randomPowerUpIndex].name);
         Instantiate(powerUpPrefabs[randomPowerUpIndex], GenerateRandomSpawnPoint(), Quaternion.identity);
         StartCoroutine("SpawnPowerUp");
     }

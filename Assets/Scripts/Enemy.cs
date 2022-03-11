@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private int health;
     private Transform player;
-    [SerializeField] private float speed;
+    [SerializeField] public float speed;
     [SerializeField] int damage;
     private int scorePoints = 50;
 
