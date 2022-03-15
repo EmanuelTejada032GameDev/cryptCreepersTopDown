@@ -20,10 +20,13 @@ public class Player : MonoBehaviour
     bool availableToShoot = true;
     [SerializeField] float fireRate = 1f;
 
+    [SerializeField] AudioClip _powerUpClip;
+
     bool powerShotEnabled;
     bool Invulnerable;
 
     [SerializeField] public float blinkRate = 1f;
+     private CameraController _cameraController;
 
     private Vector2 facingDirection;
 
@@ -40,6 +43,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         UIManager.Instance.UpdateUIhealth(health);
+        _cameraController = FindObjectOfType<CameraController>();
     }
 
     private void Update()
@@ -96,6 +100,7 @@ public class Player : MonoBehaviour
 
 
         Health -= damageAmount;
+        _cameraController.ShakeCamera();
         Debug.Log("Invulnerable for 3 seconds");
         Invulnerable = true;
         StartCoroutine("DeactivateInvulneravility");
@@ -121,6 +126,7 @@ public class Player : MonoBehaviour
 
         if (collision.CompareTag("PowerUp"))
         {
+            AudioSource.PlayClipAtPoint(_powerUpClip, transform.position);
             PowerUpType powerUpName = collision.GetComponent<PowerUp>().powerUpType;
             switch (powerUpName)
             {

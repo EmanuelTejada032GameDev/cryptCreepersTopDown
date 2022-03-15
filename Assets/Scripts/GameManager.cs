@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int score;
     public bool gameOver;
 
+    private Camera _mainCamera;
+    AudioSource _cameraAudioSource;
+
     public int Time
     {
         get => time;
@@ -27,6 +30,8 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+        _mainCamera = Camera.main;
+        _cameraAudioSource = _mainCamera.GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -42,7 +47,8 @@ public class GameManager : MonoBehaviour
             score = value;
             UIManager.Instance.UpdateUIScore(score);
             if (score % 1000 == 0)
-                dificulty++;
+                //Dificulty increase
+                EnemySpawner.Instance.increaseSpawnRate();
         }
     } 
 
@@ -57,6 +63,7 @@ public class GameManager : MonoBehaviour
         else
         {
             gameOver = true;
+            _cameraAudioSource.Stop(); ;
             if(FindObjectOfType<EnemySpawner>() != null) FindObjectOfType<EnemySpawner>().gameObject.SetActive(false);
             if(FindObjectOfType<Enemy>() != null) FindObjectOfType<Enemy>().speed = 0;
             UIManager.Instance.ShowGameOverScreen();

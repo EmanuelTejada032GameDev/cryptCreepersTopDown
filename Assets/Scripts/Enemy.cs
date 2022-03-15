@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] int damage;
     private int scorePoints = 50;
 
+    [SerializeField] AudioClip _impactAudioClip;
+    [SerializeField] AudioClip _deathAudioClip;
 
     [SerializeField] private Animator _animator;
     private void Start()
@@ -30,10 +32,12 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         health -= damageAmount;
+        AudioSource.PlayClipAtPoint(_impactAudioClip, transform.position);
         if (health <= 0)
         {
+            AudioSource.PlayClipAtPoint(_deathAudioClip, transform.position);
             GameManager.Instance.Score+=scorePoints;
-            Destroy(gameObject);
+            Destroy(gameObject, 0.1f);
         }
     }
 

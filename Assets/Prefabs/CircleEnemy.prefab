@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6142082524496076254}
   - component: {fileID: 6142082524496076250}
   - component: {fileID: 7747201088166059140}
-  - component: {fileID: 4660986610104734596}
+  - component: {fileID: 8154870370849348111}
   m_Layer: 0
   m_Name: CircleEnemy
   m_TagString: Enemy
@@ -100,6 +100,8 @@ MonoBehaviour:
   health: 6
   speed: 2
   damage: 2
+  _impactAudioClip: {fileID: 8300000, guid: de9e33dbe81a91342af9c9c7fdbd5680, type: 3}
+  _deathAudioClip: {fileID: 8300000, guid: 067a7c8d65717ab479c9ec99eb4abc8f, type: 3}
   _animator: {fileID: 7747201088166059140}
 --- !u!95 &7747201088166059140
 Animator:
@@ -120,8 +122,8 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &4660986610104734596
-BoxCollider2D:
+--- !u!58 &8154870370849348111
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -133,16 +135,6 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.003053069, y: 0.17359343}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 1.28}
-    newSize: {x: 1.28, y: 1.28}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0.0072078705, y: 0.0432477}
   serializedVersion: 2
-  m_Size: {x: 0.6449578, y: 0.21407539}
-  m_EdgeRadius: 0
+  m_Radius: 0.26758957
