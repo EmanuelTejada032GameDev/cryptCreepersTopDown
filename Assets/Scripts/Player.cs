@@ -14,12 +14,16 @@ public class Player : MonoBehaviour
 
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform firepointAim;
+    [SerializeField] Animator animator;
+    [SerializeField] SpriteRenderer spriteRenderer;
 
     bool availableToShoot = true;
     [SerializeField] float fireRate = 1f;
 
     bool powerShotEnabled;
     bool Invulnerable;
+
+    [SerializeField] public float blinkRate = 1f;
 
     private Vector2 facingDirection;
 
@@ -50,11 +54,22 @@ public class Player : MonoBehaviour
         movementVector.y = Input.GetAxisRaw("Vertical");
         transform.position += movementVector.normalized * speed * Time.deltaTime;
 
+
         //Aim movement
         facingDirection = mainCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
         // Make sure the distance between player and aim object is the same
         aim.position = transform.position + (Vector3)facingDirection.normalized;
+        animator.SetFloat("Speed", movementVector.sqrMagnitude);
+
+        if (aim.position.x > transform.position.x)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+        }
     }
 
     private void shoot()
@@ -133,9 +148,23 @@ public class Player : MonoBehaviour
 
     IEnumerator DeactivateInvulneravility()
     {
+        StartCoroutine("DamageBlinking");
         yield return new WaitForSeconds(3);
         Debug.Log("Again vulnerable");
         Invulnerable = false;
+    }
+
+    IEnumerator DamageBlinking()
+    {
+        int times = 10;
+        while (times > 0)
+        {
+            spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(times * blinkRate);
+            spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(times * blinkRate);
+            times--;
+        }
     }
 
     

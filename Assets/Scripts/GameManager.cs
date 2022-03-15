@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
         {
             gameOver = true;
             if(FindObjectOfType<EnemySpawner>() != null) FindObjectOfType<EnemySpawner>().gameObject.SetActive(false);
-            FindObjectOfType<Enemy>().speed = 0;
+            if(FindObjectOfType<Enemy>() != null) FindObjectOfType<Enemy>().speed = 0;
             UIManager.Instance.ShowGameOverScreen();
         }
     }
@@ -67,4 +67,6 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Game");
     }
+
+    
 }

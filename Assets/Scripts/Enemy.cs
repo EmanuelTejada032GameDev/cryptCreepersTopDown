@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] int damage;
     private int scorePoints = 50;
 
+
+    [SerializeField] private Animator _animator;
     private void Start()
     {
         
@@ -49,6 +51,9 @@ public class Enemy : MonoBehaviour
         {
             Vector2 direction = player.position - transform.position;
             transform.position += (Vector3)direction.normalized * speed * Time.deltaTime;
+            _animator.SetFloat("Speed", direction.sqrMagnitude);
+            _animator.SetFloat("Horizontal", direction.x);
+            _animator.SetFloat("Vertical", direction.y);
         }
 
     }
