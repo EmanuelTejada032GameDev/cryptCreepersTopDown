@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] Text timeValue;
     [SerializeField] Text finalScoreValue;
     [SerializeField] GameObject gameOverScreen;
+    [SerializeField] GameObject gamePauseScreen;
+    [SerializeField] GameObject gameAudioObject;
+
 
     private void Awake()
     {
@@ -34,7 +38,38 @@ public class UIManager : MonoBehaviour
 
     public void ShowGameOverScreen()
     {
+        if (FindObjectOfType<MainLoopAudio>() != null)
+        {
+            
+            Debug.Log($"FoundThefuckingAudioSource {FindObjectOfType<MainLoopAudio>().gameObject.name}");
+            FindObjectOfType<MainLoopAudio>().gameObject.SetActive(false);
+        };
         gameOverScreen.SetActive(true);
         finalScoreValue.text =  GameManager.Instance.Score.ToString();
+    }
+
+    public void ShowPauseMenuScreen()
+    {
+        //if (FindObjectOfType<MainLoopAudio>() != null)
+        //    FindObjectOfType<MainLoopAudio>().gameObject.SetActive(false);
+        gameAudioObject.GetComponent<AudioSource>().enabled = false;
+
+        Time.timeScale = 0;
+        gamePauseScreen.SetActive(true);
+    }
+
+    public void HidePauseMenuScreen()
+    {
+        //if (FindObjectOfType<MainLoopAudio>() != null)
+        //{
+        //    Debug.Log($"FoundThefuckingAudioSource {FindObjectOfType<MainLoopAudio>().gameObject.name}");
+        //    FindObjectOfType<MainLoopAudio>().gameObject.SetActive(true);
+        //}
+
+        gameAudioObject.GetComponent<AudioSource>().enabled = true;
+
+
+        Time.timeScale = 1;
+        gamePauseScreen.SetActive(false);
     }
 }

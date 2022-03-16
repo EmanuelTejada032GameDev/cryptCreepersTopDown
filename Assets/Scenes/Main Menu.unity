@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9660d8063aba6c4ca15d09f6b1af4b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickAudioClip: {fileID: 8300000, guid: dbf540629332063448116d3e8ae41e39, type: 3}
 --- !u!4 &133176169
 Transform:
   m_ObjectHideFlags: 0
@@ -326,7 +327,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 133176168}
         m_TargetAssemblyTypeName: FirstScene, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: PlayFirstScreenButtonAudioClip
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

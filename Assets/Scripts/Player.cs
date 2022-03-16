@@ -50,6 +50,7 @@ public class Player : MonoBehaviour
     {
         PlayerMovement();
         shoot();
+        ListenForPauseButton();
     }
 
     private void PlayerMovement()
@@ -170,6 +171,16 @@ public class Player : MonoBehaviour
             spriteRenderer.enabled = true;
             yield return new WaitForSeconds(times * blinkRate);
             times--;
+        }
+    }
+
+
+    public void ListenForPauseButton()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+           
+            UIManager.Instance.ShowPauseMenuScreen();
         }
     }
 

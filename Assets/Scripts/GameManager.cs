@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public bool gameOver;
 
     private Camera _mainCamera;
-    AudioSource _cameraAudioSource;
+
 
     public int Time
     {
@@ -31,12 +31,12 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
         _mainCamera = Camera.main;
-        _cameraAudioSource = _mainCamera.GetComponent<AudioSource>();
     }
 
     private void Start()
     {
         StartCoroutine("CountDown");
+        UIManager.Instance.UpdateUIScore(score);
     }
 
     public int Score
@@ -63,9 +63,9 @@ public class GameManager : MonoBehaviour
         else
         {
             gameOver = true;
-            _cameraAudioSource.Stop(); ;
             if(FindObjectOfType<EnemySpawner>() != null) FindObjectOfType<EnemySpawner>().gameObject.SetActive(false);
-            if(FindObjectOfType<Enemy>() != null) FindObjectOfType<Enemy>().speed = 0;
+            if (FindObjectOfType<ItemSpawner>() != null) FindObjectOfType<ItemSpawner>().gameObject.SetActive(false);
+            if (FindObjectOfType<Enemy>() != null) FindObjectOfType<Enemy>().speed = 0;
             UIManager.Instance.ShowGameOverScreen();
         }
     }
@@ -75,5 +75,14 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
-    
+    public void ResumeGame()
+    {
+        UIManager.Instance.HidePauseMenuScreen();
+    }
+
+    public void GoToMainScreen()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
+
 }
